@@ -8,6 +8,7 @@ import util::LanguageServer;
 import Relation;
 
 import Syntax;
+import Checker;
 import Generator4;
 
 PathConfig pcfg = getProjectPathConfig(|project://rascaldsl|);
@@ -23,6 +24,9 @@ set[LanguageService] contribs() = {
         return {
             <p.src, gen4(p.top, title="Generate text file")>
         };
+    }),
+    summarizer(Summary (loc _, start[Planning] p) {
+        return check(p.top);
     }),
     executor(exec)
 };
