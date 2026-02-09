@@ -1,0 +1,26 @@
+Info of the planning DepartmentABC
+All Persons:
+       Alice
+       Bob
+       Fred
+       Dave
+       Carol
+       
+All actions of tasks:
+======
+        Paper for journal Strategy 5  &
+        Pay 5000 Euro 2  &
+        Lunch at location Canteen 8 with duration: 1 h &
+        Meeting with topic Demo 4 with duration: 90 m &
+        Meeting with topic Training 7 with duration: 3 d &
+        Paper for journal Overview 2 with duration: 9 w &
+        Pay 3500 Euro 3 
+=====
+Other way of listing all tasks:
+        Organizer is: Bob, role: Employee, age: 35 -> 3 Pay 3500 Euro ,
+        Organizer is: Fred, role: Employee, age: 50 -> 8 Lunch at location Canteen ,
+        Organizer is: Bob, role: Employee, age: 35 -> 2 Pay 5000 Euro ,
+        Organizer is: Alice, role: Manager, age: 40 -> 4 Meeting with topic Demo ,
+        Organizer is: Dave, role: Manager, age: 45 -> 2 Paper for journal Overview ,
+        Organizer is: Carol, role: Employee, age: 30 -> 7 Meeting with topic Training ,
+        Organizer is: Alice, role: Manager, age: 40 -> 5 Paper for journal Strategy

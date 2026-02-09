@@ -9,31 +9,34 @@ import Relation;
 
 import Syntax;
 import Checker;
-import Generator4;
+import Generator;
 
-PathConfig pcfg = getProjectPathConfig(|project://rascaldsl|);
+PathConfig pcfg = getProjectPathConfig(|project://rascaldsl|, mode=interpreter());
 Language tdslLang = language(pcfg, "TDSL", "tdsl", "Plugin", "contribs");
 
-data Command = gen4(Planning p);
+data Command = gen(Planning p);
 
+Summary tdslSummarizer(loc l, start[Planning] input) {
+    tm = modulesTModelFromTree(input);
+    defs = getUseDef(tm);
+    return summary(l, messages = {<m.at, m> | m <- getMessages(tm), !(m is info)}, definitions = defs);
+}
 set[LanguageService] contribs() = {
     parser(start[Planning] (str program, loc src) {
         return parse(#start[Planning], program, src);
     }),
     lenses(rel[loc src, Command lens] (start[Planning] p) {
         return {
-            <p.src, gen4(p.top, title="Generate text file")>
+            <p.src, gen(p.top, title="Generate text file")>
         };
     }),
-    summarizer(Summary (loc _, start[Planning] p) {
-        return check(p.top);
-    }),
+    summarizer(tdslSummarizer),
     executor(exec)
 };
 
-value exec(gen4(Planning p)) {
-    rVal = generator4(p);
-    outputFile = |project://rascaldsl/instance/output/generator4.txt|; 
+value exec(gen(Planning p)) {
+    rVal = generator(p);
+    outputFile = |project://rascaldsl/instance/output/generator.txt|; 
     writeFile(outputFile, rVal);
     edit(outputFile);
     return ("result": true);
